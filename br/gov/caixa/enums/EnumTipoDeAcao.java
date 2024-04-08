@@ -7,13 +7,13 @@ public enum EnumTipoDeAcao {
     INVESTIR(4),
     CONSULTARSALDO(5);
 
-    private int valor;
+    private int opcao;
 
-    EnumTipoDeAcao(int valor) {
-        this.valor = valor;
+    EnumTipoDeAcao(int opcao) {
+        this.opcao = opcao;
     }
 
     public int getAcao() {
-        return valor;
+        return opcao;
     }
 }

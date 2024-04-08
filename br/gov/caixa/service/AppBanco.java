@@ -41,14 +41,6 @@ public class AppBanco {
 //        System.out.println("Saldo atual: R$" + minhaConta.getSaldoConta());
 //        minhaConta.exibirHistorico();
 
-        System.out.println("=========================================================================================");
-        System.out.println("SISTEMA BANCÁRIO - TIPOS DE AÇÕES PERMITIDAS PARA O CLIENTE !!!\n");
-        System.out.println("ESCOLHA UMA DAS OPÇÕES:\n");
-        System.out.println("OPÇÃO 1: SACAR\n");
-        System.out.println("OPÇÃO 2: DEPOSITAR\n");
-        System.out.println("OPÇÃO 3: TRANSFERIR\n");
-        System.out.println("OPÇÃO 4: INVESTIR\n");
-        System.out.println("OPÇÃO 5: CONSULTARSALDO\n");
 
 
 
@@ -73,9 +65,41 @@ public class AppBanco {
         // Ler valores digitados na tela de console (entradas no sistema)
         Scanner entrada = new Scanner(System.in);
 
+        System.out.println("=========================================================================================");
+        System.out.println("SISTEMA BANCÁRIO - TIPOS DE AÇÕES PERMITIDAS PARA O CLIENTE !!!\n");
+        System.out.println("ESCOLHA UMA DAS OPÇÕES:\n");
+        System.out.println("OPÇÃO 1: SACAR\n");
+        System.out.println("OPÇÃO 2: DEPOSITAR\n");
+        System.out.println("OPÇÃO 3: TRANSFERIR\n");
+        System.out.println("OPÇÃO 4: INVESTIR\n");
+        System.out.println("OPÇÃO 5: CONSULTARSALDO\n");
+
+        System.out.println("Digite a opçao desejada:");
+        // Assumir o valor digitado como int
+        int opcao = entrada.nextInt();
+
+        // Imprimir o texto, nesse caso com formatação
+        // e pulando linhas com \n
+        System.out.printf("\n\n\nA opção escolhida foi %s", opcao +  "\n");
+
+        // Declaração de variável
+        EnumTipoDeAcao enumTipoDeAcao = null;
+
+        // Controle de fluxo usando IF-ELSEIF-ELSE
+        if (opcao == 1) {
+            enumTipoDeAcao = EnumTipoDeAcao.SACAR;
+        } else if (opcao == 2) {
+            enumTipoDeAcao = EnumTipoDeAcao.DEPOSITAR;
+        } else if (opcao == 3) {
+            enumTipoDeAcao = EnumTipoDeAcao.CONSULTARSALDO;
+        } else if (opcao == 4) {
+            enumTipoDeAcao = EnumTipoDeAcao.INVESTIR;
+        } else if (opcao == 5) {
+            enumTipoDeAcao = EnumTipoDeAcao.TRANSFERIR;
+        }
 
         // Controle de fluxo usando SWITCH
-        switch () {
+        switch (enumTipoDeAcao) {
             case SACAR:
                 System.out.println("Ação de SAQUE");
                 System.out.println("Entre com o valor a ser sacado:");
