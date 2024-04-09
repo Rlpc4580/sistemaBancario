@@ -9,8 +9,8 @@ import java.util.List;
 public class ContaPoupanca extends Conta {
 
     public ContaPoupanca(int idConta, double saldoConta, List<String> historicoDeAcoes, Date dataDeAtualizacao,
-                         EnumStatus status, int idCliente, EnumTipoDeAcao tipoDeAcao, Cliente titular) {
-        super(idConta, saldoConta, historicoDeAcoes, dataDeAtualizacao, status, idCliente, tipoDeAcao, titular);
+                         EnumStatus status, int idCliente, EnumTipoDeAcao tipoDeAcao, Cliente titular, Conta destino) {
+        super(idConta, saldoConta, historicoDeAcoes, dataDeAtualizacao, status, idCliente, tipoDeAcao, titular, destino);
     }
 
     @Override
@@ -60,6 +60,11 @@ public class ContaPoupanca extends Conta {
 
     @Override
     public void depositar(double v) {
+
+    }
+
+    @Override
+    public void transferir(double v) {
 
     }
 }

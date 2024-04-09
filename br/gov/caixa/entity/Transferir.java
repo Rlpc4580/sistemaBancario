@@ -1,5 +1,5 @@
 package br.gov.caixa.entity;
 
 public interface Transferir {
-    double transferir();
+    void transferir(ContaCorrente contaCorrente, double valor);
 }

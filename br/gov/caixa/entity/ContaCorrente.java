@@ -7,7 +7,8 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ContaCorrente extends Conta implements Depositar, Transferir, ConsultarSaldo, AssociarTitular, ExibirHistorico, Sacar, SetIdConta, Investir {
+public class ContaCorrente extends Conta implements Depositar, ConsultarSaldo, AssociarTitular,
+        ExibirHistorico, Sacar, SetIdConta, Investir, Transferir{
     public ContaCorrente(int idConta, double saldoConta, List<String> historicoDeAcoes, LocalDate dataDeAtualizacao,
                          EnumStatus status, int idCliente, EnumTipoDeAcao tipoDeAcao, Cliente titular) {
         super(idConta, saldoConta, historicoDeAcoes, dataDeAtualizacao, status, idCliente, tipoDeAcao, titular);
@@ -62,11 +63,50 @@ public class ContaCorrente extends Conta implements Depositar, Transferir, Consu
         return 0;
     }
 
+    @Override
+    public double transferir() {
+        return 0;
+    }
+
     // Método para depositar dinheiro
     @Override
     public void depositar(double valor) {
+        historicoDeAcoes = new ArrayList<>(); // Inicializa o histórico vazio
         saldoConta += valor;
         historicoDeAcoes.add("Depósito de R$" + valor);
+    }
+
+    @Override
+    public void transferir(double v) {
+
+    }
+
+    @Override
+    public void transferir(ContaCorrente contaCorrente, double valor) {
+        // Verifica se o valor da transferência não é superior ao saldo corrente
+        if (valor <= this.saldoConta) {
+            // Realiza a transferência
+            ContaCorrente destino = contaCorrente;
+            destino.depositar(valor);
+            this.sacar(valor);
+            System.out.println("Transferência de R$" + valor + " realizada com sucesso para a conta " + destino.idCliente + ".");
+        } else {
+            System.out.println("Saldo insuficiente para transferência.");
+        }
+
+    }
+
+    @Override
+    public void transferir(Conta destino, double valor) {
+        // Verifica se o valor da transferência não é superior ao saldo corrente
+        if (valor <= this.saldoConta) {
+            // Realiza a transferência
+            destino.depositar(valor);
+            this.sacar(valor);
+            System.out.println("Transferência de R$" + valor + " realizada com sucesso para a conta " + destino.idCliente + ".");
+        } else {
+            System.out.println("Saldo insuficiente para transferência.");
+        }
     }
 
 //    public ContaCorrente(Cliente cliente3) {
@@ -117,19 +157,41 @@ public class ContaCorrente extends Conta implements Depositar, Transferir, Consu
 //    }
 
 
-    @Override
-    public double transferir() {
-        return 100;
-    }
 
     @Override
-    public double investir() {
-        return 100;
+    public double investir(double valor) {
+
+        historicoDeAcoes = new ArrayList<>(); // Inicializa o histórico vazio
+
+        // Verifica se a conta de investimento já foi criada
+        boolean contaInvestimentoCriada = true; // Suponha que já existe
+
+        if (!contaInvestimentoCriada) {
+            // Se a conta de investimento não existe, crie-a
+            System.out.println("Conta de investimento criada.");
+            // Lógica para criar a conta de investimento...
+        }
+
+        // Verifica se o valor definido não é superior ao saldo corrente
+        double valorInvestimento = 0;
+        double resultadoInvestimento = 0;
+        if (valorInvestimento <= saldoConta) {
+            // Realiza o investimento
+            resultadoInvestimento = valorInvestimento * 0.01;
+            saldoConta -= valorInvestimento; // Deduz o valor do saldo corrente
+            System.out.println("Investimento realizado com sucesso!");
+            System.out.println("Saldo corrente após o investimento: R$" + saldoConta);
+            System.out.println("Retorno do investimento: $" + resultadoInvestimento);
+        } else {
+            System.out.println("O valor definido excede o saldo corrente. Investimento não realizado.");
+        }
+        return resultadoInvestimento;
     }
 
     @Override
     public double consultarSaldo() {
-        return 100;
+        historicoDeAcoes = new ArrayList<>(); // Inicializa o histórico vazio
+        return saldoConta;
     }
 
     @Override

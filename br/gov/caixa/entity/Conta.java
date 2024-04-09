@@ -44,8 +44,10 @@ public abstract class Conta extends Cliente{
     protected EnumTipoDeAcao tipoDeAcao;
     protected Cliente titular; // Atributo para representar o cliente titular
 
+    protected Conta destino;
+
     public Conta(int idConta, double saldoConta, List<String> historicoDeAcoes, Date dataDeAtualizacao,
-                 EnumStatus status, int idCliente, EnumTipoDeAcao tipoDeAcao, Cliente titular) {
+                 EnumStatus status, int idCliente, EnumTipoDeAcao tipoDeAcao, Cliente titular, Conta destino) {
     }
 
     public Conta(String nome, EnumClassificacao classificacao) {
@@ -143,4 +145,9 @@ public abstract class Conta extends Cliente{
     public abstract void exibirHistorico();
 
     public abstract void depositar(double v);
+
+    public abstract void transferir(double v);
+
+    public void transferir(Conta conta2, double v) {
+    }
 }

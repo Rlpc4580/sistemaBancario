@@ -9,8 +9,8 @@ import java.util.List;
 public class ContaInvestimento extends Conta {
 
     public ContaInvestimento(int idConta, double saldoConta, List<String> historicoDeAcoes, Date dataDeAtualizacao,
-                             EnumStatus status, int idCliente, EnumTipoDeAcao tipoDeAcao, Cliente titular) {
-        super(idConta, saldoConta, historicoDeAcoes, dataDeAtualizacao, status, idCliente, tipoDeAcao, titular);
+                             EnumStatus status, int idCliente, EnumTipoDeAcao tipoDeAcao, Cliente titular, Conta destino) {
+        super(idConta, saldoConta, historicoDeAcoes, dataDeAtualizacao, status, idCliente, tipoDeAcao, titular, destino);
     }
 
 
@@ -61,6 +61,11 @@ public class ContaInvestimento extends Conta {
 
     @Override
     public void depositar(double v) {
+
+    }
+
+    @Override
+    public void transferir(double v) {
 
     }
 }

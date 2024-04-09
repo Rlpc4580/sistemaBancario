@@ -32,35 +32,24 @@ public class AppBanco {
         contaCorrente.associarTitular(cliente3, contaCorrente);
         System.out.println("Nome do Cliente 3: " + cliente3.getNome() + " " + " " + contaCorrente.getSaldoConta());
 
-        ContaCorrente minhaConta = new ContaCorrente(123, 10000.0);
-        minhaConta.setSaldoConta(10000);
+//        ContaCorrente conta1 = new ContaCorrente(123, 10000.0);
+//        conta1.setSaldoConta(10000);
+//
+//        ContaCorrente conta2 = new ContaCorrente(123, 10000.0);
+//        conta2.setSaldoConta(10000);
 
-//        minhaConta.sacar(30000.0);
-//        minhaConta.depositar(2000.0);
+        ContaCorrente conta1 = new ContaCorrente(12345, 10000.0);
+        conta1.setSaldoConta(10000);
 
-//        System.out.println("Saldo atual: R$" + minhaConta.getSaldoConta());
-//        minhaConta.exibirHistorico();
+        ContaCorrente conta2 = new ContaCorrente(67890, 500.0);
+        conta2.setSaldoConta(500);
 
+        // Exemplo de uso
+//        Conta conta1 = new ContaCorrente(12345, 1000.0);
+//        Conta conta2 = new ContaCorrente(67890, 500.0);
 
-
-
-//        EnumStatus statusCliente = EnumStatus.ATIVO;
-
-//        EnumStatus statusContaCorrente = EnumStatus.INATIVO;
-
-
-//        int status1 = EnumStatus.ATIVO.getValor();
-//        System.out.println(status1);
-
-//        int status2 = EnumStatus.INATIVO.getValor();
-//        System.out.println(status2);
-
-//        String s = "INATIVO";
-
-//       EnumStatus status = EnumStatus.valueOf(s);
-//        System.out.println(status.getValor());
-
- //       double saque = EnumTipoDeAcao.SACAR.getAcao();
+        // Realiza uma transferência de R$200 da conta1 para a conta2
+//        conta1.transferir(conta2, 200.0);
 
         // Ler valores digitados na tela de console (entradas no sistema)
         Scanner entrada = new Scanner(System.in);
@@ -80,7 +69,7 @@ public class AppBanco {
 
         // Imprimir o texto, nesse caso com formatação
         // e pulando linhas com \n
-        System.out.printf("\n\n\nA opção escolhida foi %s", opcao +  "\n");
+        System.out.printf("\n\n\nA opção escolhida foi %s", opcao + "\n");
 
         // Declaração de variável
         EnumTipoDeAcao enumTipoDeAcao = null;
@@ -91,11 +80,11 @@ public class AppBanco {
         } else if (opcao == 2) {
             enumTipoDeAcao = EnumTipoDeAcao.DEPOSITAR;
         } else if (opcao == 3) {
-            enumTipoDeAcao = EnumTipoDeAcao.CONSULTARSALDO;
+            enumTipoDeAcao = EnumTipoDeAcao.TRANSFERIR;
         } else if (opcao == 4) {
             enumTipoDeAcao = EnumTipoDeAcao.INVESTIR;
         } else if (opcao == 5) {
-            enumTipoDeAcao = EnumTipoDeAcao.TRANSFERIR;
+            enumTipoDeAcao = EnumTipoDeAcao.CONSULTARSALDO;
         }
 
         // Controle de fluxo usando SWITCH
@@ -104,10 +93,44 @@ public class AppBanco {
                 System.out.println("Ação de SAQUE");
                 System.out.println("Entre com o valor a ser sacado:");
                 // Assumir o valor digitado como String
-                String num = entrada.next();
-                minhaConta.sacar(Double.parseDouble(num));
-                System.out.println("Saldo atual: R$" + minhaConta.getSaldoConta());
-                minhaConta.exibirHistorico();
+                String vlrSaque = entrada.next();
+                conta1.sacar(Double.parseDouble(vlrSaque));
+                System.out.println("Saldo atual: R$" + conta1.getSaldoConta());
+                conta1.exibirHistorico();
+                break;
+            case DEPOSITAR:
+                System.out.println("Ação de DEPÓSITO");
+                System.out.println("Entre com o valor a ser depositado:");
+                // Assumir o valor digitado como String
+                String vlrDeposito = entrada.next();
+                conta1.depositar(Double.parseDouble(vlrDeposito));
+                System.out.println("Saldo atual: R$" + conta1.getSaldoConta());
+                conta1.exibirHistorico();
+                break;
+            case TRANSFERIR:
+                System.out.println("Ação de TRANSFERÊNCIA");
+                System.out.println("Entre com o valor a ser transferido:");
+//                // Assumir o valor digitado como String
+                String vlrTransferencia = entrada.next();
+                conta1.transferir(conta2, Double.parseDouble(vlrTransferencia));
+                System.out.println("Saldo atual: R$" + conta2.getSaldoConta());
+                conta2.exibirHistorico();
+                break;
+            case INVESTIR:
+                System.out.println("Ação de INVESTIR");
+                System.out.println("Entre com o valor a ser investido:");
+                // Assumir o valor digitado como String
+                String vlrInvestimento = entrada.next();
+                conta1.investir(Double.parseDouble(vlrInvestimento));
+                System.out.println("Saldo atual: R$" + conta1.getSaldoConta());
+                conta1.exibirHistorico();
+                break;
+            case CONSULTARSALDO:
+                System.out.println("Ação de CONSULTAR SALDO");
+                System.out.println("O valor da conta no momento é de R$:");
+                conta1.consultarSaldo();
+                System.out.println("Saldo atual: R$" + conta1.getSaldoConta());
+                conta1.exibirHistorico();
                 break;
             default:
                 System.out.println("Precisa trabalhar bastante ainda");
